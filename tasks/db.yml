@@ -1,0 +1,40 @@
+---
+
+#- name: Install php module php-mysql
+#  ansible.builtin.apt:
+#    name: php-mysql
+#    state: present
+
+#- name: Enable php-mysql module
+#  ansible.builtin.command: phpenmod mysqli
+
+#- name: Install PyMySQL python library
+#  ansible.builtin.apt:
+#    name: python3-mysqldb
+#    state: present
+#  #ansible.builtin.pip:
+#  #  name: pymysql
+#  #  state: present
+
+- name: Create mysql user
+  community.mysql.mysql_user:
+    name: "wordpress"
+    state: present
+    priv: 'wordpress_prod.*:ALL'
+    check_implicit_admin: yes
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    host: localhost
+    login_unix_socket: "{{ mariadb_socket }}"
+    password: "{{ wordpress.mariadb.user.password }}"
+
+- name: Create the Wordpress database
+  community.mysql.mysql_db:
+    name: "wordpress_prod"
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    login_unix_socket: "{{ mariadb_socket }}"
+
+
+

@@ -1,0 +1,25 @@
+---
+
+- name: install pkgs
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wordpress
+
+- ansible.builtin.include_tasks: db.yml
+
+- name: Create Wordpress configuration
+  ansible.builtin.template:
+    src: "config.php.j2"
+    dest: "/etc/wordpress/config-wp-prod.thesrv.de.php"
+    mode: 0600
+    owner: www-data
+    group: www-data
+
+
+
+
+
+

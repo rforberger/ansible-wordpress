@@ -1,0 +1,9 @@
+---
+
+- name:
+  ansible.builtin.service:
+    name:
+    state: reloaded
+
+
+

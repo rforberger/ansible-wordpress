@@ -1,0 +1,15 @@
+---
+dependencies: [nginx, mariadb]
+
+galaxy_info:
+  role_name: wordpress
+  author: ronnyforberger
+  description: A role to deploy Wordpress
+  company: "Ronny Forberger IT CONSULTING SERVICES"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Debian
+      versions:
+        - all
+
